@@ -103,6 +103,18 @@ func main() {
 	students = []Student{}
 	api := http.NewServeMux()
 
+	// introduction page
+
+	api.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Welcome to the Student Management API\n"))
+		w.Write([]byte("You can use the following endpoints to manage students\n"))
+		w.Write([]byte("GET /students - Get all students\n"))
+		w.Write([]byte("POST /students - Create a new student\n"))
+		w.Write([]byte("PUT /students/{id} - Update a student\n"))
+		w.Write([]byte("DELETE /students/{id} - Delete a student\n"))
+		w.Write([]byte("GET /students/{id}/summary - Get a summary of a student\n"))
+	})
+
 	// Handle both GET and POST for /students
 	api.HandleFunc("/students", func(w http.ResponseWriter, r *http.Request) {
 		enableCORS(w)
